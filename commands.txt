@@ -1,0 +1,119 @@
+git status- t ensenna el estado del commit(ex si has hecho un cambio pero no lo has annadido)
+
+git show- te ensenna todos los cambios historicos q has hecho incluyendo todas las lineas de codigo de texto que han cambiado, cuando se hicieron esos cambios y quien los hizo
+
+git log "nombre de archivo con extension"- te muestra la historia entera de un archivo. esta hordenado en orden descendente desde la mas nueva a la mas vieja, la primera es la mas nueva.Usar git log --stat para ver los cambios especificos que se hicieron a partir del commit
+
+history- comando que te permite ver la historia de comandos con un numero de index para acceder nuevamente a ellos. Para acceder al comando por el index necesitaras escribir el simbolo "!" y el numero de index.
+
+git diff 'numero de una version' 'numero de otra version'- los numeros de versiones se ven con el comando git log ahi estaria comparando los cambios desde el primero al segundo, normalmente se pone el mas reciente de primero. si solo se pone el comando git diff entonces veras los cambios entre lo q existe en staging o sea memoria ram y lo q existe en el directorio o sea disco duro, es decir ver diferencias entre directorio actual y staging
+
+git reset 'tag del commit'- nos permite volver a una version anterior. Hay dos tipo de git reset el hard y soft. --soft --hard. Si se usa hard todo vuelve al estado anterior si se usa soft se mantiene las cosas en el staging o sea si agregaste algo con add . Cambia el head al commit o version a la q se fue. El hard incluso borra la historia en git log
+
+git checkout 'tag del commit'- te lleva al commit que pusiste si le adicionas despues del tag del comit con espacio algun archivo en especifico entonces te llevara al commit pero solo al cambio de ese archivo en especifico. git checkout master te trae de retorno a la ultima version. git checkout ademas te sirve para cambiar entre ramas. Funciona trayendo un commit nuevo con la fucion de las dos ramas o sea des sus ultimos dos commits
+
+git push- para enviar lo q tengo en mi repositorio local al repositorio remoto(ojo: repositorio local no directorio de trabajo)
+
+git fetch- en caso de que quisiera traer un nuevo cambio que se hizo en el repositorio remoto para mi repositorio local entonces utilizo este comando(ojo solo lo trae a mi repositorio local no a mi directorio de trabajo para hacer esa gestion necesitaria ademas el comando git merge)
+
+git merge- trae los cambios q tengo en el repositorio local (q probablemente consegui haciendo un fetch desde mi repositorio remoto) hasta mi repositorio local. El merge entre ramas (git merge 'nombre de la rama q va a venir') siempre va a funcionar trayendo el contenido de otra rama hacia la rama donde estoy
+
+git pull- fusiona los conceptos de git fetch y git merge en uno solo. Copia tambien la base de datos de cambios del proyecto
+
+git branch- te nesenna todas las ramas de tu proyectos, si usas git branch 'un nombre' crea una rama con el nombre asignado y q almacenara el ultimo comit de la rama q estabas cuando se creo.
+
+git remote add origin 'direccion q se copia en github en la parte de clonar'-esto te permite poner tu proyecto q ya esta incializado en git (git init) en github.
+
+git pull origin master- esto me permitira traer primero lo q esta en mi repo hacia mi directorio de trabajo. Normalmente se aplica porque creamos un readme al crear el repo y nos dara un problema a la hora de subir nuestro directorio hacia este repo si primero no traemos este readme al directorio. Este proceso lanzara warnings  uno de ellos sera q no se puede hacer un merge entre las historias de los commits y para solucionarlo necesitariamos el proximo comando.
+
+git pull origin master --allow-unrelated-histories -este comando hace el pull y permite hacer el merge de las historias
+
+git push origin master- comando acto seguido de agregar el origin en el comando superior q es el q permite subir nuestro proyecto al repo online. Incluye tambien las historia de los commits.
+
+git remote- muestra todos los repos con los q mi proyecto local esta conectado
+
+git remote -v  -muestra todos los repos con los q mi proyecto local esta conectado con sus respectivas urls 
+
+Las llaves publicas y las llaves privadas tambien son conocidas como sifrado asymetrico de un solo camino.
+
+Ojo a la hora de configurar las llaves d cifrado con github necesitamos estar seguro q nuestro email en git sea el mismo de github, esto lo podemos comprobar con el comando git config -l
+
+git remote set-url origin - se utiliza para cambiar las url por ejemplo cuando vasmos a clonar el repo pero en vez de utilizar el protocolo de https, usaremos ssh
+
+git log --all --graph - te muestra el log pero con una definicion de ramas
+
+
+git log --all --graph --decorate --oneline - lo mismo que el anterior pero mucho mejor vizualizacion
+
+alias 'nombre del comando q kieras setear'="comando" - de esta manera le daras un nombre corto a un comando largo de la manera q puedas personalizar los comandos muy largos para ser llamados con solo una palabra de tu preferencia, o sea llamrlos por su alias
+
+alias - te ensenna todos los alias seteados
+
+git tag -a 'nombre de la version' -m 'mensaje' 'numero del commit' - esto te permite crear tags en tu proyecto q mas adelantes subiras a la web o sea al repo q es donde hace sentido que se reflejen todos estos tags
+
+git show-ref --tags - muestra los tags q estan ligados con los respectivos commits
+
+git push origin --tags - manda nuestros tags creados en el directorio hacie el repo online
+
+git tag -d 'nombre del tag sin quotes' -se utiliza para borrar los tags aunque tambien lo puedes hacer desde la interfaz de github. de esta manera se borra el tag pero se sigue biendo el indice con su nombre en la seccion de tags de github
+
+git push origin :refs/tags/'nombre del tag sin quotes' - de esta manera ya una vez borrado el tag es q borramos tambien la referencia en github
+
+git show-branch - muestra las ramas que histe y  algo de su historia. Si agraguemos --all da mas datos
+
+gitk - muestra visual a traves de un programa todo de la historia y ramas etc
+
+para introducir otra rama en el remoto solo tenemos que hacer una ve z estemos update hacemos git push origin 'nombre de la rama'
+
+git clone 'url del proyecto' - se utiliza para clonar un proyecto y tenerlo en tu directorio
+
+Cuando estamos haciendo un fork a otro proyecto (o sea no somos contribuidor) pero queremos tener las ultimas actualizaciones de ese proyecto debido a q se hicieron nuevos commits y estamos versiones atras desde q lo clonamos, tenemos dos bias una es simplemente desde github haciendo un merge trayendonos los cambios de ese proyecto y la otra y la mas recomendada seria a traves de consola de la siguiente forma: primero estamos hubicados en al rama master del repositorio local de la persona q tiene el fork y ponemos el sigueintte comando git remote add 'upstream' ( ojo puede ser cualkier nombre pero por lo regular se utiliza ese nombre), despues el comando git remote -v para verificar cuantos accesos tiene nuestro directorio local a distintos repositorios remotos y por ultimo el comando git pull upstream master, despues un commit q diga q fusionaste preferiblemente, para luego hacer un git push origin master a nuestro repositorio originl
+
+&'letra a acentuar'acute; - asi se ponen las tildes leibles para cualkier sistema operativo
+
+rebase- es aggarrar una rama entera y pegarla en otro, es muy util cuando por ejemplo estamos trabajando en la rama master y detectamos un bug, entoces creamos otra rama desde nuestra rama master llamada por ejemplo 'bug-fix' hacemos varios commits en esta rama y arreglamos el bug luego hacemos un merge con la rama master y listo, pero si en vez de kerer tener esta rama suelta queremos agregarla y a sus commits al historial de la rama master entonces hacemos un rebase. esto se considera muy mala practica enviandola a repositorios remotos. Deberia ser solo para repositrios locales. 
+
+el rebase funciona de la siguitnte manera: una vez creamos la rama alterna entonces hacemos los cambios correspondientes y por supuesto los guardamos con commit, echos los cambios si cambiamos algo en nuestra rama principal podemos traernorlos con un git rebase "rama principal" desde la rama alterna, aunq lo normal pra estos casos seria ir a la principal y poner git rebase "rama alterna" para traerno todos esos cambios de la rama creada asi como sus historias. una vez echa esta operacion podemos borrar la ram alterna (git branch -D "rama alterna") e igual mantendremos los cambios ya q lo q hicimos fue traernos todo de ella y no la necesitaremos mas y para no dejar huellas de q existio, recordar q esto siempre se debe de hacer de manera local y nunk en el repo online.
+
+git stash - este comando es muy util y si utiliza si hicimos nuevos cambios en una rema pero en vez de agregarlos y guardarlos con comid lo queremos guardar en solo un espacio de memoria por el momento. si usamos el comando entonce desaparecera todos los cambios q agregamos y con el comando de abajo podremos ver la lista de stash q tenemos donde aparecera nuestro stash con los cambios hechos, si queremos retornar los cambios q hicismos en esta rama entonces uzamos el comando git stash pop y vuelven a salir. En caso de que queriamosguardar estos cambios guardados en stash en otra rama podriamos hacerlo con el siguiente comando git stash branch 'nombre de la rama q guardaria los cambios'. Una vez en esta rama tendriamos q hacerle commit. una vez q creamos la rama se pierde el stash cuando checkeamos con stash list. Otro uso importante de este comando es cuando quiero borrar todos los cambios q se han hecho desde el ultimo commit debido a q no me gustaron o etc. para ello usariamos el comando guardando estos cambios en stash y luego usamos el comando git stash drop q me permitiria borrar este stash.\
+
+git clean - otro comando util q podemos uzar en caso q tenemos archivos repetidos y queremos borrarlos, ojo solo archivos git clean no toma en cuenta las carpetas. Una vez ejecutado el comando te va a dar un fatal debido a que kiere alertaert si de verdad quieres borrar esos archivos, entonces utilizamos el comando git clean --dry-run para q nos de una lista de todos los archivos q serian borrados en caso de ejecutar el comando, una vez verificados os archivos a borrar ponemos el comando git clean -f q este si fozaria la limpieza y borra los archivos. Algo importante es q si tienes archivos duplicados pero q estan recogidos por el .gitignore estos archivos tampoco seran detectados por el git clean debido a q lo q este en gitignore sirve para todo git incluso su motor de limpieza.
+
+cherry pick- es el comando q se utiliza cuando estas avanzando en una rama y necesitas en master uno de los commits de esa rama. Funciona estando en la rama a la q le quieres poner el commit (primero deberias ir a la rama donde esta el commit y con comandos como por ejemplo git log --oneline copiar el hash del commit q te quieres traer) usas el comando git cherry-pick 'hash del commit' y automaticamente lo trae sin necesidad de hacer un nuevo commit para guardar estos cambios debido a q ya te traes un commit o sea un cambio(ojo en caso de conflictos creo q te da lo opcion de solucionarlo y actualizar los cambios etc para hacer el merge). Se considera una mala practica la verdad deberia ser un checkout y luego un merge. pero es util en algunos casos aunq reconstruyas la historia.
+
+ammend - el amend es muy bueno a la hora de q hicismos un commit pero se nos olvido hacer algunos cambios q incluso comentamos en el mensaje del commit. para ello hacemos estos nuevos cambios OJO los agregamos o trackeamos con git add . o git add 'el archivo cambiado' y luego utilizamos el comando git commit --amend q adiere estos cambios al ultimo commit q hicimos, automaticamente despues de este comando se nos despliega el vim en caso de q tambien queramos corregir o cambiar el mensaje de ese ultimo commit al cual le estamos agregando cambios actualizamos o dejamos como esta y recuerda guardar conn el comando ESC+SHIFT+Z+Z.
+
+git reflog - es un comando especializado q nos ayuda mucha a la hora q borramos o guardamos algunas cambios indeseados  y queremos volver a recuperar los de un commit anterior, este comando no solo nos muestra como un git log --oneline sino q tambien nos muestra las historias de los heads, una vez encontrado el head q corresponde al commit al q kieres volver lo copiamos y lo utilizamos con el siguiente comando. este comando ademas lo especial q tienes es q te muestra siempre la verdad cuando hacemos un reset hard en git log no sale la historia pero git reflog si, lo q incluso te permite volver a uno de tus errores.
+
+git reset ... lo usamos con --hard con el numero de head o el numero del commit,recomendado el del commit.
+
+git greg 'palabra a buscar' - comando q se utiliza para buscar una cierta palabra en nuestro proyecto, recordar q solo funciona para la rama en q estemos.
+
+git greg -n 'palabra a buscar' - nos muestra ademas la linea de codigo donde se encuentra
+
+git greg -c 'palabra a buscar' - nos muestra la cantidad de veces q sale la palabra.
+
+ojo para referenciar palabras con sintaxis como '<p>' necesitaras poner la palabra entre quotes.
+
+git log -S 'palabra a buscar' - se utiliza para buscar una palabra pero en la historia de los commits.
+
+COMANDO UTILES Y COLABORATIVOS:
+
+git shortlog - nos muestra un log por persona de lo q ha hecho cada uno de los mienbros del equipo
+
+git shortlog -sn nos muestra la cantidad de commit asignada a caa persona. existen otras variantes como el git shortlog -sn --all q te los muestra ahasta lo mas minimo y el git shortlog -sn -all --no-merges q no muestra los merges
+
+git config --global alias.'palabra de alias sin commillas' 'comando al cual ponerle el alias entre commillas' -
+este comando nos permite crear alias en git. despues ponemos git 'palabra alias' y boom.
+
+git blame 'archivo del repo' y podemos ver quien hizo q en la historia de la contruccion de ese archivo. git blame -c se ve un poco mejor.
+
+git 'comando' -help - nos muestra el manual q vive dentro de nuestras conputadoras con todas las opciones par este comando
+
+git blame 'archivo del repo' -L35,65 - este por ejemplo nos mostraria quienes hicieron los cambios o crearon las lineas de la 35 a la 65 a esto tambien le puedo agregar -c justo al final para q se vea mejor 
+
+git branch -r - vez las ramas remotas
+
+git branch -a - las muestra todas
+
+curso profesional de devops.
