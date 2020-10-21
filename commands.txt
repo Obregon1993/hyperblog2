@@ -116,4 +116,16 @@ git branch -r - vez las ramas remotas
 
 git branch -a - las muestra todas
 
+En algunos casos agrgamos el .gitignore despues de q algunos archivos ya estan trackeado por lo q no dejan de aparecer en nuesto repo online para arreglar este suceso debemos completar esta serie de pasos:
+
+git rm -r --cached . - este comando permite remover todo desde el indice luego:
+
+git add .
+
+git commit -m '.gitignore is now working' 
+
+git push orgin master- para q se reflejen lso cambios en el repo online
+---------------------------------------
+
+
 curso profesional de devops.
